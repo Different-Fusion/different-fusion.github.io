@@ -215,6 +215,47 @@
             letter-spacing: 1px;
         }
 
+        /* --- Scroll Animations --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Stagger delay for grid items */
+        .fade-in:nth-child(1) { transition-delay: 0s; }
+        .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in:nth-child(4) { transition-delay: 0.3s; }
+        .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
         /* Safari / iOS fixes */
         @supports (-webkit-touch-callout: none) {
             .hero {
@@ -674,13 +715,13 @@
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title" data-i18n="about-title">הסיפור שלנו</h2>
+        <h2 class="section-title fade-in" data-i18n="about-title">הסיפור שלנו</h2>
         <div class="about-content">
-            <div class="about-text">
+            <div class="about-text fade-in-left">
                 <p data-i18n="about-p1">Different Fusion הוא פרויקט מוזיקלי ייחודי שנולד מהחיבור היצירתי בין דוראל פדלון וסיון חיים. המטרה שלנו היא להביא סאונד אחר, רענן ואנרגטי לעולם האירועים וההפקות המוזיקליות.</p>
                 <p data-i18n="about-p2">אנחנו מאמינים שמוזיקה היא לא רק צלילים, אלא חוויה רגשית וויזואלית שלמה. השילוב בינינו מאפשר לנו לתת מענה היקפי - מדיג'יי סטים בועטים ועד להפקה מוזיקלית מאפס.</p>
             </div>
-            <div class="about-image">
+            <div class="about-image fade-in-right">
                 <img id="about-img" src="" alt="Different Fusion Studio" style="display:none;">
             </div>
         </div>
@@ -688,24 +729,24 @@
 
     <!-- Services Section -->
     <section id="services">
-        <h2 class="section-title" data-i18n="services-title">מה אנחנו עושים</h2>
+        <h2 class="section-title fade-in" data-i18n="services-title">מה אנחנו עושים</h2>
         <div class="services-grid">
-            <div class="service-card" onclick="selectServiceAndScroll('הופעות ואירועים')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הופעות ואירועים')">
                 <i class="fas fa-bolt"></i>
                 <h3 data-i18n="svc-1-t">הופעות ואירועים</h3>
                 <p data-i18n="svc-1-d">סטים של Live DJ המשלבים אנרגיה גבוהה וקריאת קהל מדויקת בכל אירוע.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הפקה מוזיקלית')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הפקה מוזיקלית')">
                 <i class="fas fa-sliders-h"></i>
                 <h3 data-i18n="svc-2-t">הפקה מוזיקלית</h3>
                 <p data-i18n="svc-2-d">יצירת סאונד ייחודי ועיבודים מקוריים המותאמים אישית לחזון שלכם.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הקלטות אולפן')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הקלטות אולפן')">
                 <i class="fas fa-microphone-alt"></i>
                 <h3 data-i18n="svc-3-t">הקלטות אולפן</h3>
                 <p data-i18n="svc-3-d">הקלטה, מיקס ומאסטרינג בסטנדרטים הגבוהים ביותר באולפן המקצועי שלנו.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הפקת מסיבות')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הפקת מסיבות')">
                 <i class="fas fa-glass-cheers"></i>
                 <h3 data-i18n="svc-4-t">הפקת מסיבות</h3>
                 <p data-i18n="svc-4-d">תכנון והפקה של אירועי קונספט ומסיבות פרטיות עם ירידה לפרטים.</p>
@@ -715,8 +756,8 @@
 
     <!-- Music Section -->
     <section id="music">
-        <h2 class="section-title" data-i18n="music-title">מוזיקה וסטים</h2>
-        <div class="soundcloud-widget">
+        <h2 class="section-title fade-in" data-i18n="music-title">מוזיקה וסטים</h2>
+        <div class="soundcloud-widget fade-in">
             <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
                 src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/differentfusionmusic22&color=%2300f2ff&auto_play=false&show_comments=false&show_user=true&visual=false"
                 onerror="this.parentElement.innerHTML=scFallback()">
@@ -748,7 +789,7 @@
 
     <!-- Gallery -->
     <section id="gallery">
-        <h2 class="section-title" data-i18n="gallery-title">רגעים מהבמה</h2>
+        <h2 class="section-title fade-in" data-i18n="gallery-title">רגעים מהבמה</h2>
         <div class="gallery-grid" id="gallery-grid">
             <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען תמונות...</span></div>
         </div>
@@ -756,8 +797,8 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <div class="contact-box">
-            <h2 class="section-title" style="border:none; text-align:center; padding:0; margin-bottom:40px;" data-i18n="contact-title">בואו נשתף פעולה</h2>
+        <div class="contact-box fade-in">
+            <h2 class="section-title fade-in" style="border:none; text-align:center; padding:0; margin-bottom:40px;" data-i18n="contact-title">בואו נשתף פעולה</h2>
             <form id="contactForm">
                 <div class="form-group">
                     <label data-i18n="lbl-name">שם מלא</label>
@@ -804,7 +845,7 @@
     </div>
 
     <!-- Footer -->
-    <footer>
+    <footer class="fade-in">
         <p class="footer-brand">DIFFERENT<span>FUSION</span></p>
         <p class="footer-sub">DOREL FADLON & SIVAN HAIM</p>
         <div class="footer-icons">
@@ -1251,6 +1292,25 @@
                     btn.disabled    = false;
                 });
         });
+
+    
+        /* --- Scroll Animation Observer --- */
+        const animObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    animObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        function initAnimations() {
+            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
+                animObserver.observe(el);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initAnimations);
 
     </script>
 </body>
