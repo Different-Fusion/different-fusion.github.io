@@ -882,7 +882,7 @@
     <!-- Testimonials Section -->
     <section id="testimonials">
         <h2 class="section-title" data-i18n="testimonials-title">הם כבר חוו את זה</h2>
-        <div class="testimonials-grid">
+        <div class="testimonials-grid" id="testimonials-grid">
 
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
@@ -1216,7 +1216,7 @@
         }
 
         /* --- Dynamic Images from Google Drive --- */
-        const DRIVE_API = "https://script.google.com/macros/s/AKfycbycOMreQiUSarfAkujIFuUF6DMZspUYdIvSLzwDA9a3xIeWn8kEd_TLUSrqc4sjTFA/exec";
+        const DRIVE_API = "https://script.google.com/macros/s/AKfycbw4oSmLk40BeIlAfK8c18toNbpBD5KWsFxzKySoYe0myuspPRhEISEv2sCSrv2kb-Tu/exec";
 
         function handleDriveData(data) {
             const grid     = document.getElementById('gallery-grid');
@@ -1256,22 +1256,47 @@
 
             if (galleryItems.length === 0) {
                 grid.innerHTML = '<div class="gallery-loading"><i class="fas fa-images"></i><span>אין תמונות בגלריה עדיין</span></div>';
-                return;
+            } else {
+                grid.innerHTML = '';
+                galleryImages.length = 0;
+                galleryItems.forEach(function(img, i) {
+                    galleryImages.push(img.url);
+                    const item  = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.onclick   = function() { openLightbox(i); };
+                    const image    = document.createElement('img');
+                    image.src      = img.url;
+                    image.alt      = img.name;
+                    image.loading  = 'lazy';
+                    item.appendChild(image);
+                    grid.appendChild(item);
+                });
             }
-            grid.innerHTML = '';
-            galleryImages.length = 0;
-            galleryItems.forEach(function(img, i) {
-                galleryImages.push(img.url);
-                const item  = document.createElement('div');
-                item.className = 'gallery-item';
-                item.onclick   = function() { openLightbox(i); };
-                const image    = document.createElement('img');
-                image.src      = img.url;
-                image.alt      = img.name;
-                image.loading  = 'lazy';
-                item.appendChild(image);
-                grid.appendChild(item);
-            });
+
+            // Testimonials
+            if (data.testimonials && data.testimonials.length > 0) {
+                const container = document.getElementById('testimonials-grid');
+                if (container) {
+                    container.innerHTML = '';
+                    data.testimonials.forEach(function(t) {
+                        const stars = '★'.repeat(Math.min(5, Math.max(1, t.stars || 5)));
+                        const avatar = t.name ? t.name.charAt(0) : '?';
+                        const card = document.createElement('div');
+                        card.className = 'testimonial-card';
+                        card.innerHTML =
+                            '<div class="testimonial-stars">' + stars + '</div>' +
+                            '<p class="testimonial-text">"' + t.text + '"</p>' +
+                            '<div class="testimonial-author">' +
+                                '<div class="testimonial-avatar">' + avatar + '</div>' +
+                                '<div>' +
+                                    '<div class="testimonial-name">' + t.name + '</div>' +
+                                    '<div class="testimonial-role">' + t.role + '</div>' +
+                                '</div>' +
+                            '</div>';
+                        container.appendChild(card);
+                    });
+                }
+            }
         }
 
         async function loadDriveImages() {
