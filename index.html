@@ -1356,25 +1356,12 @@
 
     
         /* --- Scroll to Top visibility --- */
-        (function() {
-            let ticking = false;
+        window.addEventListener('scroll', function() {
             const btn = document.getElementById('scroll-top');
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(function() {
-                        if (btn) {
-                            if (window.scrollY > 400) {
-                                btn.classList.add('visible');
-                            } else {
-                                btn.classList.remove('visible');
-                            }
-                        }
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
-        })();
+            if (btn) {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            }
+        }, { passive: true });
 
     </script>
 </body>
