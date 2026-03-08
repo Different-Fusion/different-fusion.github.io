@@ -553,15 +553,41 @@
             justify-content: center;
             align-items: center;
             touch-action: none;
+            flex-direction: column;
+            gap: 0;
         }
         #lightbox.active { display: flex; }
         #lightbox img { 
             max-width: 90%; 
-            max-height: 80vh; 
+            max-height: 78vh; 
             user-select: none;
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
-        .lb-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.5rem; cursor: pointer; z-index: 2001; }
+        .lb-close { position: absolute; top: 25px; right: 30px; color: white; font-size: 2.5rem; cursor: pointer; z-index: 2001; transition: var(--transition); }
+        .lb-close:hover { color: var(--primary); }
+
+        .lb-counter {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Bebas Neue';
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+            z-index: 2001;
+        }
+
+        .lb-caption {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            text-align: center;
+            min-height: 20px;
+            max-width: 80%;
+        }
         
         .lb-nav {
             position: absolute;
@@ -1040,9 +1066,11 @@
     <!-- Lightbox -->
     <div id="lightbox">
         <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <div class="lb-counter" id="lb-counter"></div>
         <button class="lb-nav lb-prev" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
         <img id="lightbox-img" src="">
         <button class="lb-nav lb-next" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+        <div class="lb-caption" id="lb-caption"></div>
     </div>
 
     <!-- Footer -->
@@ -1201,11 +1229,11 @@
 
         /* --- Gallery Logic --- */
         const galleryImages = [
-            "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.75761-15/491434121_18039216926625584_4179460538848356776_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_ohc=OlBrQGxdSiQQ7kNvwHenVzV&_nc_oc=AdlLdOcNQlc0CXWtwYKDVFrSuYA0KlO1izwVvPWExk6HwkpQi5uZEJFqoZriPHuA3mg&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=OVVfQ40tI1biRFHFhGydTg&oh=00_AfsmDcYuhExSy7c4Q3bNx7KFczqGaXUB3NgY2OEE6zI0jA&oe=69A4C9EA",
-            "https://scontent.fsdv2-1.fna.fbcdn.net/v/t51.82787-15/532929172_18052858271625584_5090822862400550124_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=nLMD9AdjZQwQ7kNvwEoCI6i&_nc_oc=AdmfVHJLvfsZoacM8WkxvlZBSRNGyqTqXBEjMHHeweIjf73EfLnjpiSsox2KhXdrd-k&_nc_zt=23&_nc_ht=scontent.fsdv2-1.fna&_nc_gid=38JVnkRa0tHkkGFSguYx5w&oh=00_Aft_mbzmijeS2kiO28rvpUNoxqTn-nL7hGehupNeSFSxjw&oe=69A4C0F3",
-            "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.82787-15/603948724_18068637734625584_3840584997983001117_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=iDULlQ-st_EQ7kNvwFeOBnN&_nc_oc=Adnez5TowPAFtFzSnv8GdL-X5ImBdrbZAxzeHvlNtJKby_ae2TXkiqY_puJ6AOxdSE8&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=7PP-M9PKHvJagQ8IRxA62A&oh=00_AfuLsThf2dO2OMMBIw7g661f31uzA0xNnmTUcuI4owoGWg&oe=69A4AB2B",
-            "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.75761-15/472334804_18027280139625584_5767399209160854898_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=13d280&_nc_ohc=uVUme0tLRCQQ7kNvwECJ_31&_nc_oc=Adli-opUJMXcA1_a_2Aqq_QEcs_x6wOsW_uE9oL49lwpRNfcE5Y9vk_g0p3T-vF7PRw&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=o4J3cLHSZLeRMMm8prDwng&oh=00_AftkkrB43YdZZr1YlUyZSj2ccNpPPbCgk_elaamco02BTw&oe=69A4AE34",
-            "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.82787-15/608849275_18068637713625584_1046058259929833479_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_ohc=aQNeR6qwMKYQ7kNvwFL2CPF&_nc_oc=AdkNy_em-I_4fiyKkAaOv2lHV5Ld7Q3gAw8q61kMvEtqygv02vopCqL-dN25MbjARjE&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=7PP-M9PKHvJagQ8IRxA62A&oh=00_AftN9M5BNO8-l29ZxvqKCAxrnO3gKbyymMDboTwkzxDCMA&oe=69A49B0C"
+            { url: "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.75761-15/491434121_18039216926625584_4179460538848356776_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_ohc=OlBrQGxdSiQQ7kNvwHenVzV&_nc_oc=AdlLdOcNQlc0CXWtwYKDVFrSuYA0KlO1izwVvPWExk6HwkpQi5uZEJFqoZriPHuA3mg&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=OVVfQ40tI1biRFHFhGydTg&oh=00_AfsmDcYuhExSy7c4Q3bNx7KFczqGaXUB3NgY2OEE6zI0jA&oe=69A4C9EA", name: "" },
+            { url: "https://scontent.fsdv2-1.fna.fbcdn.net/v/t51.82787-15/532929172_18052858271625584_5090822862400550124_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=nLMD9AdjZQwQ7kNvwEoCI6i&_nc_oc=AdmfVHJLvfsZoacM8WkxvlZBSRNGyqTqXBEjMHHeweIjf73EfLnjpiSsox2KhXdrd-k&_nc_zt=23&_nc_ht=scontent.fsdv2-1.fna&_nc_gid=38JVnkRa0tHkkGFSguYx5w&oh=00_Aft_mbzmijeS2kiO28rvpUNoxqTn-nL7hGehupNeSFSxjw&oe=69A4C0F3", name: "" },
+            { url: "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.82787-15/603948724_18068637734625584_3840584997983001117_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=iDULlQ-st_EQ7kNvwFeOBnN&_nc_oc=Adnez5TowPAFtFzSnv8GdL-X5ImBdrbZAxzeHvlNtJKby_ae2TXkiqY_puJ6AOxdSE8&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=7PP-M9PKHvJagQ8IRxA62A&oh=00_AfuLsThf2dO2OMMBIw7g661f31uzA0xNnmTUcuI4owoGWg&oe=69A4AB2B", name: "" },
+            { url: "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.75761-15/472334804_18027280139625584_5767399209160854898_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=13d280&_nc_ohc=uVUme0tLRCQQ7kNvwECJ_31&_nc_oc=Adli-opUJMXcA1_a_2Aqq_QEcs_x6wOsW_uE9oL49lwpRNfcE5Y9vk_g0p3T-vF7PRw&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=o4J3cLHSZLeRMMm8prDwng&oh=00_AftkkrB43YdZZr1YlUyZSj2ccNpPPbCgk_elaamco02BTw&oe=69A4AE34", name: "" },
+            { url: "https://scontent.ftlv23-1.fna.fbcdn.net/v/t51.82787-15/608849275_18068637713625584_1046058259929833479_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_ohc=aQNeR6qwMKYQ7kNvwFL2CPF&_nc_oc=AdkNy_em-I_4fiyKkAaOv2lHV5Ld7Q3gAw8q61kMvEtqygv02vopCqL-dN25MbjARjE&_nc_zt=23&_nc_ht=scontent.ftlv23-1.fna&_nc_gid=7PP-M9PKHvJagQ8IRxA62A&oh=00_AftN9M5BNO8-l29ZxvqKCAxrnO3gKbyymMDboTwkzxDCMA&oe=69A49B0C", name: "" }
         ];
 
         let currentIndex = 0;
@@ -1225,7 +1253,10 @@
         }
 
         function updateLightbox() {
-            document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+            document.getElementById('lightbox-img').src = galleryImages[currentIndex].url;
+            document.getElementById('lb-counter').textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+            const name = galleryImages[currentIndex].name || '';
+            document.getElementById('lb-caption').textContent = name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
         }
 
         function nextImage() {
@@ -1336,7 +1367,7 @@
                 grid.innerHTML = '';
                 galleryImages.length = 0;
                 galleryItems.forEach(function(img, i) {
-                    galleryImages.push(img.url);
+                    galleryImages.push({ url: img.url, name: img.name });
                     const item  = document.createElement('div');
                     item.className = 'gallery-item';
                     item.onclick   = function() { openLightbox(i); };
