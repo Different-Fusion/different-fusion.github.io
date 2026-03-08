@@ -1000,6 +1000,9 @@
         <div class="gallery-grid" id="gallery-grid">
             <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען תמונות...</span></div>
         </div>
+        <div class="testimonials-more" id="gallery-more" style="display:none;">
+            <button class="btn-more-testimonials" onclick="openLightbox(0, true)" data-i18n="btn-more-gallery">לכל הגלריה</button>
+        </div>
     </section>
 
     <!-- Testimonials Section -->
@@ -1107,6 +1110,7 @@
                 "nav-testimonials": "מה אומרים עלינו",
                 "testimonials-title": "הם כבר חוו את זה",
                 "btn-more-testimonials": "לכל ההמלצות",
+                "btn-more-gallery": "לכל הגלריה",
                 "hero-cta": "הזמן עכשיו",
                 "about-title": "הסיפור שלנו",
                 "about-p1": "Different Fusion הוא פרויקט מוזיקלי ייחודי שנולד מהחיבור היצירתי בין דוראל פדלון וסיון חיים. המטרה שלנו היא להביא סאונד אחר, רענן ואנרגטי לעולם האירועים וההפקות המוזיקליות.",
@@ -1143,6 +1147,7 @@
                 "nav-testimonials": "What They Say",
                 "testimonials-title": "They've Already Felt It",
                 "btn-more-testimonials": "All Reviews",
+                "btn-more-gallery": "Full Gallery",
                 "hero-cta": "Book Now",
                 "about-title": "Our Story",
                 "about-p1": "Different Fusion is a unique musical project born from the creative synergy between Dorel Fadlon and Sivan Haim. Our goal is to bring a fresh, energetic sound to the world of events and music production.",
@@ -1240,8 +1245,8 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        function openLightbox(index) {
-            currentIndex = index;
+        function openLightbox(index, browseAll) {
+            currentIndex = index || 0;
             updateLightbox();
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1366,18 +1371,25 @@
             } else {
                 grid.innerHTML = '';
                 galleryImages.length = 0;
+                const MAX_GALLERY = 6;
                 galleryItems.forEach(function(img, i) {
                     galleryImages.push({ url: img.url, name: img.name });
-                    const item  = document.createElement('div');
-                    item.className = 'gallery-item';
-                    item.onclick   = function() { openLightbox(i); };
-                    const image    = document.createElement('img');
-                    image.src      = img.url;
-                    image.alt      = img.name;
-                    image.loading  = 'lazy';
-                    item.appendChild(image);
-                    grid.appendChild(item);
+                    if (i < MAX_GALLERY) {
+                        const item  = document.createElement('div');
+                        item.className = 'gallery-item';
+                        item.onclick   = function() { openLightbox(i); };
+                        const image    = document.createElement('img');
+                        image.src      = img.url;
+                        image.alt      = img.name;
+                        image.loading  = 'lazy';
+                        item.appendChild(image);
+                        grid.appendChild(item);
+                    }
                 });
+                const galleryMore = document.getElementById('gallery-more');
+                if (galleryMore && galleryItems.length > MAX_GALLERY) {
+                    galleryMore.style.display = 'block';
+                }
             }
 
             // Testimonials
