@@ -704,6 +704,94 @@
             .lb-next { right: 5px; }
             .contact-box { padding: 30px 20px; }
         }
+
+        /* --- Testimonials --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 35px 30px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.15;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(0, 242, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 242, 255, 0.08);
+        }
+
+        .testimonial-stars {
+            color: var(--primary);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .testimonial-text {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue';
+            font-size: 1.3rem;
+            color: var(--bg-dark);
+            flex-shrink: 0;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .testimonial-role {
+            font-size: 0.82rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -728,6 +816,7 @@
         <a href="#" data-i18n="nav-services" onclick="scrollToSection('services'); return false;">מה אנחנו עושים</a>
         <a href="#" data-i18n="nav-music" onclick="scrollToSection('music'); return false;">מוזיקה וסטים</a>
         <a href="#" data-i18n="nav-gallery" onclick="scrollToSection('gallery'); return false;">רגעים מהבמה</a>
+        <a href="#" data-i18n="nav-testimonials" onclick="scrollToSection('testimonials'); return false;">מה אומרים עלינו</a>
         <a href="#" data-i18n="nav-contact" onclick="scrollToSection('contact'); return false;">בואו נשתף פעולה</a>
     </div>
 
@@ -829,6 +918,62 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2 class="section-title fade-in" data-i18n="testimonials-title">הם כבר חוו את זה</h2>
+        <div class="testimonials-grid">
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"הגעתם למסיבת היום הולדת שלי והפכתם אותה לחוויה שכולם עוד מדברים עליה. האנרגיה שלכם הדביקה את כל האורחים מהרגע הראשון. תודה ענקית!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">נ</div>
+                    <div>
+                        <div class="testimonial-name">נועה כהן</div>
+                        <div class="testimonial-role">מסיבת יום הולדת פרטית</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"עבדנו איתם על הפקת השיר הראשון שלנו — מקצועיות ברמה אחרת. הם הבינו בדיוק מה רצינו לבטא ונתנו לזה סאונד שלא ציפינו אליו. ממליצים בחום!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">א</div>
+                    <div>
+                        <div class="testimonial-name">אסף לוי</div>
+                        <div class="testimonial-role">הפקה מוזיקלית</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Different Fusion ניגנו באירוע החברה שלנו ופשוט שברו את הבמה. שילוב הסטים שלהם היה מדויק לקהל שלנו — מ-20 עד 60. כולם יצאו עם חיוך."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">מ</div>
+                    <div>
+                        <div class="testimonial-name">מיכל רוזנברג</div>
+                        <div class="testimonial-role">אירוע קונספט חברתי</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"הגענו אליהם לאולפן לא בטוחים בכלל במה שאנחנו רוצים. הם ידעו לכוון, לייעץ ולהוציא מאיתנו את הטוב ביותר. התוצאה הייתה מעבר לכל ציפיה."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">ש</div>
+                    <div>
+                        <div class="testimonial-name">שירה ואלון מזרחי</div>
+                        <div class="testimonial-role">הקלטות אולפן</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="contact-box fade-in">
@@ -909,6 +1054,8 @@
                 "nav-music": "מוזיקה וסטים",
                 "nav-gallery": "רגעים מהבמה",
                 "nav-contact": "בואו נשתף פעולה",
+                "nav-testimonials": "מה אומרים עלינו",
+                "testimonials-title": "הם כבר חוו את זה",
                 "hero-cta": "הזמן עכשיו",
                 "about-title": "הסיפור שלנו",
                 "about-p1": "Different Fusion הוא פרויקט מוזיקלי ייחודי שנולד מהחיבור היצירתי בין דוראל פדלון וסיון חיים. המטרה שלנו היא להביא סאונד אחר, רענן ואנרגטי לעולם האירועים וההפקות המוזיקליות.",
@@ -942,6 +1089,8 @@
                 "nav-music": "Music & Sets",
                 "nav-gallery": "Stage Moments",
                 "nav-contact": "Let's Collaborate",
+                "nav-testimonials": "What They Say",
+                "testimonials-title": "They've Already Felt It",
                 "hero-cta": "Book Now",
                 "about-title": "Our Story",
                 "about-p1": "Different Fusion is a unique musical project born from the creative synergy between Dorel Fadlon and Sivan Haim. Our goal is to bring a fresh, energetic sound to the world of events and music production.",
