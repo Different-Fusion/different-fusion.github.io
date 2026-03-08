@@ -1349,13 +1349,9 @@
             });
         }
 
-        // Defer animations until browser is idle - prevents blocking initial scroll
-        window.addEventListener('DOMContentLoaded', function() {
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(initAnimations, { timeout: 1000 });
-            } else {
-                setTimeout(initAnimations, 200);
-            }
+        // Run animations only after full page load (images, scripts, etc.)
+        window.addEventListener('load', function() {
+            setTimeout(initAnimations, 300);
         });
 
     
