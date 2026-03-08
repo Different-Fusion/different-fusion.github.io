@@ -214,6 +214,70 @@
             color: rgba(160, 160, 160, 0.4);
             letter-spacing: 1px;
         }
+
+        /* --- Scroll Animations --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Stagger delay for grid items */
+        .fade-in:nth-child(1) { transition-delay: 0s; }
+        .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in:nth-child(4) { transition-delay: 0.3s; }
+        .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+        /* Safari / iOS fixes */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                height: -webkit-fill-available;
+                min-height: 600px;
+            }
+            .nav-links {
+                height: -webkit-fill-available;
+            }
+        }
+
+        /* Prevent tap highlight on iOS */
+        a, button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Fix for position:fixed on iOS Safari */
+        .lang-float {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
         /* --- Scroll to Top Button --- */
         .scroll-top {
             position: fixed;
@@ -685,13 +749,13 @@
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title" data-i18n="about-title">הסיפור שלנו</h2>
+        <h2 class="section-title fade-in" data-i18n="about-title">הסיפור שלנו</h2>
         <div class="about-content">
-            <div class="about-text">
+            <div class="about-text fade-in-left">
                 <p data-i18n="about-p1">Different Fusion הוא פרויקט מוזיקלי ייחודי שנולד מהחיבור היצירתי בין דוראל פדלון וסיון חיים. המטרה שלנו היא להביא סאונד אחר, רענן ואנרגטי לעולם האירועים וההפקות המוזיקליות.</p>
                 <p data-i18n="about-p2">אנחנו מאמינים שמוזיקה היא לא רק צלילים, אלא חוויה רגשית וויזואלית שלמה. השילוב בינינו מאפשר לנו לתת מענה היקפי - מדיג'יי סטים בועטים ועד להפקה מוזיקלית מאפס.</p>
             </div>
-            <div class="about-image">
+            <div class="about-image fade-in-right">
                 <img id="about-img" src="" alt="Different Fusion Studio" style="display:none;">
             </div>
         </div>
@@ -699,24 +763,24 @@
 
     <!-- Services Section -->
     <section id="services">
-        <h2 class="section-title" data-i18n="services-title">מה אנחנו עושים</h2>
+        <h2 class="section-title fade-in" data-i18n="services-title">מה אנחנו עושים</h2>
         <div class="services-grid">
-            <div class="service-card" onclick="selectServiceAndScroll('הופעות ואירועים')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הופעות ואירועים')">
                 <i class="fas fa-bolt"></i>
                 <h3 data-i18n="svc-1-t">הופעות ואירועים</h3>
                 <p data-i18n="svc-1-d">סטים של Live DJ המשלבים אנרגיה גבוהה וקריאת קהל מדויקת בכל אירוע.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הפקה מוזיקלית')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הפקה מוזיקלית')">
                 <i class="fas fa-sliders-h"></i>
                 <h3 data-i18n="svc-2-t">הפקה מוזיקלית</h3>
                 <p data-i18n="svc-2-d">יצירת סאונד ייחודי ועיבודים מקוריים המותאמים אישית לחזון שלכם.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הקלטות אולפן')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הקלטות אולפן')">
                 <i class="fas fa-microphone-alt"></i>
                 <h3 data-i18n="svc-3-t">הקלטות אולפן</h3>
                 <p data-i18n="svc-3-d">הקלטה, מיקס ומאסטרינג בסטנדרטים הגבוהים ביותר באולפן המקצועי שלנו.</p>
             </div>
-            <div class="service-card" onclick="selectServiceAndScroll('הפקת מסיבות')">
+            <div class="service-card fade-in" onclick="selectServiceAndScroll('הפקת מסיבות')">
                 <i class="fas fa-glass-cheers"></i>
                 <h3 data-i18n="svc-4-t">הפקת מסיבות</h3>
                 <p data-i18n="svc-4-d">תכנון והפקה של אירועי קונספט ומסיבות פרטיות עם ירידה לפרטים.</p>
@@ -726,8 +790,8 @@
 
     <!-- Music Section -->
     <section id="music">
-        <h2 class="section-title" data-i18n="music-title">מוזיקה וסטים</h2>
-        <div class="soundcloud-widget">
+        <h2 class="section-title fade-in" data-i18n="music-title">מוזיקה וסטים</h2>
+        <div class="soundcloud-widget fade-in">
             <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
                 src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/differentfusionmusic22&color=%2300f2ff&auto_play=false&show_comments=false&show_user=true&visual=false"
                 onerror="this.parentElement.innerHTML=scFallback()">
@@ -759,7 +823,7 @@
 
     <!-- Gallery -->
     <section id="gallery">
-        <h2 class="section-title" data-i18n="gallery-title">רגעים מהבמה</h2>
+        <h2 class="section-title fade-in" data-i18n="gallery-title">רגעים מהבמה</h2>
         <div class="gallery-grid" id="gallery-grid">
             <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען תמונות...</span></div>
         </div>
@@ -767,8 +831,8 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <div class="contact-box">
-            <h2 class="section-title" style="border:none; text-align:center; padding:0; margin-bottom:40px;" data-i18n="contact-title">בואו נשתף פעולה</h2>
+        <div class="contact-box fade-in">
+            <h2 class="section-title fade-in" style="border:none; text-align:center; padding:0; margin-bottom:40px;" data-i18n="contact-title">בואו נשתף פעולה</h2>
             <form id="contactForm">
                 <div class="form-group">
                     <label data-i18n="lbl-name">שם מלא</label>
@@ -837,103 +901,7 @@
     <!-- Floating Language Button -->
     <button class="lang-float" id="lang-btn" onclick="toggleLanguage()">EN</button>
 
-        /* --- Dynamic Images from Google Drive --- */
-        const DRIVE_API = "https://script.google.com/macros/s/AKfycbycOMreQiUSarfAkujIFuUF6DMZspUYdIvSLzwDA9a3xIeWn8kEd_TLUSrqc4sjTFA/exec";
-
-        function handleDriveData(data) {
-            const grid     = document.getElementById('gallery-grid');
-            const heroImg  = document.getElementById('hero-img');
-            const aboutImg = document.getElementById('about-img');
-
-            // Assets: look for keys containing "hero" or "about"
-            if (data.assets) {
-                Object.keys(data.assets).forEach(function(key) {
-                    const url = data.assets[key];
-                    if (key.toLowerCase().includes('hero') && heroImg) {
-                        heroImg.src = url;
-                        heroImg.style.display = 'block';
-                    }
-                    if (key.toLowerCase().includes('about') && aboutImg) {
-                        aboutImg.src = url;
-                        aboutImg.style.display = 'block';
-                    }
-                });
-            }
-
-            // Gallery: all images from gallery folder
-            // But also check if hero/about accidentally landed in gallery
-            const galleryItems = (data.gallery || []).filter(function(img) {
-                const n = img.name.toLowerCase();
-                return !n.includes('hero') && !n.includes('about');
-            });
-
-            // If hero/about are in gallery folder, show them as assets
-            (data.gallery || []).forEach(function(img) {
-                const n = img.name.toLowerCase();
-                if (n.includes('hero') && heroImg && !heroImg.src) {
-                    heroImg.src = img.url;
-                    heroImg.style.display = 'block';
-                }
-                if (n.includes('about') && aboutImg && !aboutImg.src) {
-                    aboutImg.src = img.url;
-                    aboutImg.style.display = 'block';
-                }
-            });
-
-            if (galleryItems.length === 0) {
-                grid.innerHTML = '<div class="gallery-loading"><i class="fas fa-images"></i><span>אין תמונות בגלריה עדיין</span></div>';
-                return;
-            }
-            grid.innerHTML = '';
-            galleryImages.length = 0;
-            galleryItems.forEach(function(img, i) {
-                galleryImages.push(img.url);
-                const item  = document.createElement('div');
-                item.className = 'gallery-item';
-                item.onclick   = function() { openLightbox(i); };
-                const image    = document.createElement('img');
-                image.src      = img.url;
-                image.alt      = img.name;
-                image.loading  = 'lazy';
-                item.appendChild(image);
-                grid.appendChild(item);
-            });
-        }
-
-        async function loadDriveImages() {
-            // Try fetch first
-            try {
-                const res  = await fetch(DRIVE_API, { mode: 'cors' });
-                const data = await res.json();
-                handleDriveData(data);
-                return;
-            } catch(e1) {
-                // fetch failed, try JSONP
-            }
-
-            // Fallback: JSONP
-            try {
-                await new Promise(function(resolve, reject) {
-                    window._driveCallback = function(data) {
-                        handleDriveData(data);
-                        resolve();
-                    };
-                    const s   = document.createElement('script');
-                    s.src     = DRIVE_API + '?callback=_driveCallback&t=' + Date.now();
-                    s.onload  = resolve;
-                    s.onerror = reject;
-                    document.head.appendChild(s);
-                    setTimeout(reject, 8000); // 8s timeout
-                });
-            } catch(e2) {
-                const grid = document.getElementById('gallery-grid');
-                if (grid) grid.innerHTML = '<div class="gallery-loading"><i class="fas fa-exclamation-circle"></i><span>שגיאה בטעינת תמונות</span></div>';
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', loadDriveImages);
-
-
+    <script>
         const translations = {
             he: {
                 "nav-about": "הסיפור שלנו",
@@ -1196,6 +1164,35 @@
             });
         }
 
+        async function loadDriveImages() {
+            try {
+                const res  = await fetch(DRIVE_API, { mode: 'cors' });
+                const data = await res.json();
+                handleDriveData(data);
+                return;
+            } catch(e1) {}
+
+            try {
+                await new Promise(function(resolve, reject) {
+                    window._driveCallback = function(data) {
+                        handleDriveData(data);
+                        resolve();
+                    };
+                    const s   = document.createElement('script');
+                    s.src     = DRIVE_API + '?callback=_driveCallback&t=' + Date.now();
+                    s.onload  = resolve;
+                    s.onerror = reject;
+                    document.head.appendChild(s);
+                    setTimeout(reject, 8000);
+                });
+            } catch(e2) {
+                const grid = document.getElementById('gallery-grid');
+                if (grid) grid.innerHTML = '<div class="gallery-loading"><i class="fas fa-exclamation-circle"></i><span>שגיאה בטעינת תמונות</span></div>';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadDriveImages);
+
     
         /* --- EmailJS --- */
         emailjs.init('3qQwtbgKRChl2yVQa');
@@ -1239,7 +1236,26 @@
         });
 
     
+        /* --- Scroll Animation Observer --- */
+        function initAnimations() {
+            const animObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        animObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
 
+            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
+                animObserver.observe(el);
+            });
+        }
+
+        // Run animations only after full page load (images, scripts, etc.)
+        window.addEventListener('load', function() {
+            setTimeout(initAnimations, 300);
+        });
 
     
         /* --- Scroll to Top visibility --- */
@@ -1250,7 +1266,6 @@
             }
         }, { passive: true });
 
-    
-</script>
+    </script>
 </body>
 </html>
