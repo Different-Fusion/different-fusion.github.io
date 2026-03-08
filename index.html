@@ -302,84 +302,6 @@
             .testimonials-grid { grid-template-columns: 1fr; }
         }
 
-        /* --- Loading Screen --- */
-        #loading-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--bg-dark);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            transition: opacity 0.5s ease;
-        }
-
-        #loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader-logo {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
-            letter-spacing: 4px;
-            color: white;
-        }
-
-        .loader-logo span { color: var(--primary); }
-
-        .loader-bar {
-            width: 200px;
-            height: 2px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .loader-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--primary);
-            animation: loadBar 1.2s ease forwards;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        @keyframes loadBar {
-            0%   { width: 0%; }
-            60%  { width: 75%; }
-            100% { width: 100%; }
-        }
-
-        /* Hide body overflow during loading */
-        body.loading { overflow: hidden; }
-
-
-
-        /* Safari / iOS fixes */
-        @supports (-webkit-touch-callout: none) {
-            .hero {
-                height: -webkit-fill-available;
-                min-height: 600px;
-            }
-            .nav-links {
-                height: -webkit-fill-available;
-            }
-        }
-
-        /* Prevent tap highlight on iOS */
-        a, button {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Fix for position:fixed on iOS Safari */
-        .lang-float {
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-        }
-
         /* --- Scroll to Top Button --- */
         .scroll-top {
             position: fixed;
@@ -809,13 +731,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body class="loading">
-
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader-logo">DIFFERENT<span>FUSION</span></div>
-        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-    </div>
+<body>
 
     <!-- Navigation -->
     <nav>
@@ -1608,24 +1524,7 @@
             .testimonials-grid { grid-template-columns: 1fr; }
         }
 
-        /* --- Loading Screen --- */
-        function hideLoader() {
-            const loader = document.getElementById('loading-screen');
-            const body   = document.body;
-            if (loader && !loader.classList.contains('hidden')) {
-                loader.classList.add('hidden');
-                body.classList.remove('loading');
-                setTimeout(function() { loader.style.display = 'none'; }, 500);
-            }
-        }
-
-        // Hide after page load
-        window.addEventListener('load', function() {
-            setTimeout(hideLoader, 1200);
-        });
-
-        // Fallback: hide after 4 seconds no matter what
-        setTimeout(hideLoader, 2500);
+        
 
     </script>
 </body>
