@@ -214,94 +214,6 @@
             color: rgba(160, 160, 160, 0.4);
             letter-spacing: 1px;
         }
-
-        /* --- Testimonials --- */
-        #testimonials {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(0,242,255,0.03) 50%, var(--bg-dark) 100%);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .testimonial-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(0,242,255,0.15);
-            border-radius: 8px;
-            padding: 35px 30px;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0,242,255,0.1);
-            transform: translateY(-4px);
-        }
-
-        .testimonial-quote {
-            font-size: 3rem;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 15px;
-            opacity: 0.6;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--bg-dark);
-            flex-shrink: 0;
-        }
-
-        .testimonial-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: white;
-        }
-
-        .testimonial-role {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .testimonial-stars {
-            color: var(--primary);
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 900px) {
-            .testimonials-grid { grid-template-columns: 1fr; }
-        }
-
         /* --- Scroll to Top Button --- */
         .scroll-top {
             position: fixed;
@@ -846,54 +758,6 @@
     </section>
 
     <!-- Gallery -->
-    <section id="testimonials">
-        <div class="container">
-            <h2 class="section-title" data-i18n="testimonials-title">מה אומרים עלינו</h2>
-            <div class="testimonials-grid">
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text" data-i18n="test-1">הופעה בחתונה שלנו הייתה פשוט מושלמת. האנרגיה, המוזיקה, ההתאמה לקהל — הכל היה מדויק. האורחים עדיין מדברים על זה.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">ר״מ</div>
-                        <div>
-                            <div class="testimonial-name" data-i18n="test-1-name">רון ומיכל כהן</div>
-                            <div class="testimonial-role" data-i18n="test-1-role">חתונה פרטית, תל אביב</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text" data-i18n="test-2">עבדנו עם Different Fusion על הפקת שיר לאמן מוכר. מקצועיות ברמה אחרת — מהסאונד, דרך האולפן ועד לתוצאה הסופית. ממליצים בחום!</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">של</div>
-                        <div>
-                            <div class="testimonial-name" data-i18n="test-2-name">שלומי לוי</div>
-                            <div class="testimonial-role" data-i18n="test-2-role">מפיק מוזיקלי</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text" data-i18n="test-3">ארגנו מסיבת קונספט גדולה וסמכנו על הצוות של Different Fusion מהתכנון ועד הביצוע. תשומת הלב לפרטים הקטנים היא מה שמבדיל אותם.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">נד</div>
-                        <div>
-                            <div class="testimonial-name" data-i18n="test-3-name">נטע דגן</div>
-                            <div class="testimonial-role" data-i18n="test-3-role">מארגנת אירועים</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <section id="gallery">
         <h2 class="section-title" data-i18n="gallery-title">רגעים מהבמה</h2>
         <div class="gallery-grid" id="gallery-grid">
@@ -1091,16 +955,6 @@
                 "svc-4-t": "הפקת מסיבות",
                 "svc-4-d": "תכנון והפקה של אירועי קונספט ומסיבות פרטיות עם ירידה לפרטים.",
                 "music-title": "מוזיקה וסטים",
-                "testimonials-title": "מה אומרים עלינו",
-                "test-1": "הופעה בחתונה שלנו הייתה פשוט מושלמת. האנרגיה, המוזיקה, ההתאמה לקהל — הכל היה מדויק. האורחים עדיין מדברים על זה.",
-                "test-1-name": "רון ומיכל כהן",
-                "test-1-role": "חתונה פרטית, תל אביב",
-                "test-2": "עבדנו עם Different Fusion על הפקת שיר לאמן מוכר. מקצועיות ברמה אחרת — מהסאונד, דרך האולפן ועד לתוצאה הסופית. ממליצים בחום!",
-                "test-2-name": "שלומי לוי",
-                "test-2-role": "מפיק מוזיקלי",
-                "test-3": "ארגנו מסיבת קונספט גדולה וסמכנו על הצוות של Different Fusion מהתכנון ועד הביצוע. תשומת הלב לפרטים הקטנים היא מה שמבדיל אותם.",
-                "test-3-name": "נטע דגן",
-                "test-3-role": "מארגנת אירועים",
                 "gallery-title": "רגעים מהבמה",
                 "contact-title": "בואו נשתף פעולה",
                 "lbl-name": "שם מלא",
@@ -1134,16 +988,6 @@
                 "svc-4-t": "Party Production",
                 "svc-4-d": "Planning and producing concept events and private parties with attention to detail.",
                 "music-title": "Music & Sets",
-                "testimonials-title": "What They Say",
-                "test-1": "The performance at our wedding was simply perfect. The energy, the music, the crowd reading — everything was spot on. Our guests are still talking about it.",
-                "test-1-name": "Ron & Michal Cohen",
-                "test-1-role": "Private Wedding, Tel Aviv",
-                "test-2": "We worked with Different Fusion on producing a track for a well-known artist. Professional at the highest level — from the sound to the studio to the final result. Highly recommended!",
-                "test-2-name": "Shlomi Levi",
-                "test-2-role": "Music Producer",
-                "test-3": "We organized a large concept party and trusted the Different Fusion team from planning to execution. The attention to small details is what sets them apart.",
-                "test-3-name": "Neta Dagan",
-                "test-3-role": "Event Organizer",
                 "gallery-title": "Stage Moments",
                 "contact-title": "Let's Collaborate",
                 "lbl-name": "Full Name",
@@ -1407,95 +1251,6 @@
         }, { passive: true });
 
     
-        /* --- Testimonials --- */
-        #testimonials {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(0,242,255,0.03) 50%, var(--bg-dark) 100%);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .testimonial-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(0,242,255,0.15);
-            border-radius: 8px;
-            padding: 35px 30px;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0,242,255,0.1);
-            transform: translateY(-4px);
-        }
-
-        .testimonial-quote {
-            font-size: 3rem;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 15px;
-            opacity: 0.6;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--bg-dark);
-            flex-shrink: 0;
-        }
-
-        .testimonial-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: white;
-        }
-
-        .testimonial-role {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .testimonial-stars {
-            color: var(--primary);
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 900px) {
-            .testimonials-grid { grid-template-columns: 1fr; }
-        }
-
-        
-
-    </script>
+</script>
 </body>
 </html>
