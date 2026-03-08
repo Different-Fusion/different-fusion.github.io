@@ -400,21 +400,23 @@
         /* --- About Section --- */
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: 3fr 2fr;
+            gap: 60px;
             align-items: start;
         }
         .about-text p {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             margin-bottom: 20px;
             color: var(--text-dim);
+            line-height: 1.9;
         }
         .about-image {
             display: flex;
             justify-content: center;
+            padding-top: 10px;
         }
         .about-image img {
-            width: 75%;
+            width: 100%;
             border: 1px solid var(--primary);
             box-shadow: 12px 12px 0px var(--primary);
             transition: var(--transition);
@@ -792,8 +794,7 @@
         .videos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 960px;
+            gap: 24px;
         }
 
         .video-item {
@@ -1177,10 +1178,8 @@
     <!-- Videos Section -->
     <section id="videos">
         <h2 class="section-title" data-i18n="videos-title">צפו בנו בפעולה</h2>
-        <div style="display:flex; justify-content:center;">
         <div class="videos-grid" id="videos-grid">
             <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען סרטונים...</span></div>
-        </div>
         </div>
         <div class="testimonials-more" id="videos-more" style="display:none;">
             <button class="btn-more-testimonials" onclick="openVideosModal()" data-i18n="btn-more-videos">לכל הסרטונים</button>
