@@ -1353,16 +1353,25 @@
 
     
         /* --- Scroll to Top visibility --- */
-        window.addEventListener('scroll', function() {
+        (function() {
+            let ticking = false;
             const btn = document.getElementById('scroll-top');
-            if (btn) {
-                if (window.scrollY > 400) {
-                    btn.classList.add('visible');
-                } else {
-                    btn.classList.remove('visible');
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        if (btn) {
+                            if (window.scrollY > 400) {
+                                btn.classList.add('visible');
+                            } else {
+                                btn.classList.remove('visible');
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-            }
-        });
+            }, { passive: true });
+        })();
 
     </script>
 </body>
