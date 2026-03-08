@@ -1334,22 +1334,29 @@
 
     
         /* --- Scroll Animation Observer --- */
-        const animObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    animObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
         function initAnimations() {
+            const animObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        animObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
             document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
                 animObserver.observe(el);
             });
         }
 
-        window.addEventListener('DOMContentLoaded', initAnimations);
+        // Defer animations until browser is idle - prevents blocking initial scroll
+        window.addEventListener('DOMContentLoaded', function() {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initAnimations, { timeout: 1000 });
+            } else {
+                setTimeout(initAnimations, 200);
+            }
+        });
 
     
         /* --- Scroll to Top visibility --- */
