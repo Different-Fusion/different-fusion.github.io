@@ -215,11 +215,66 @@
             letter-spacing: 1px;
         }
 
+        /* --- Loading Screen --- */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            color: white;
+        }
+
+        .loader-logo span { color: var(--primary); }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            animation: loadBar 1.2s ease forwards;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes loadBar {
+            0%   { width: 0%; }
+            60%  { width: 75%; }
+            100% { width: 100%; }
+        }
+
+        /* Hide body overflow during loading */
+        body.loading { overflow: hidden; }
+
         /* --- Scroll Animations --- */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
         }
 
         .fade-in.visible {
@@ -229,8 +284,9 @@
 
         .fade-in-left {
             opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateX(-35px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
         }
 
         .fade-in-left.visible {
@@ -240,8 +296,9 @@
 
         .fade-in-right {
             opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateX(35px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
         }
 
         .fade-in-right.visible {
@@ -707,7 +764,13 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body>
+<body class="loading">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-logo">DIFFERENT<span>FUSION</span></div>
+        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -1349,9 +1412,9 @@
             });
         }
 
-        // Run animations only after full page load (images, scripts, etc.)
-        window.addEventListener('load', function() {
-            setTimeout(initAnimations, 300);
+        // Init animations after DOM ready + short delay for smooth first scroll
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initAnimations, 100);
         });
 
     
@@ -1362,6 +1425,22 @@
                 btn.classList.toggle('visible', window.scrollY > 400);
             }
         }, { passive: true });
+
+    
+        /* --- Loading Screen --- */
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loading-screen');
+            const body   = document.body;
+            // Min display time 1.2s so bar animation completes
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                body.classList.remove('loading');
+                // Remove from DOM after fade
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1200);
+        });
 
     </script>
 </body>
