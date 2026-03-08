@@ -278,6 +278,40 @@
             transform: translateZ(0);
         }
 
+        /* --- Scroll to Top Button --- */
+        .scroll-top {
+            position: fixed;
+            bottom: 90px;
+            left: 30px;
+            width: 46px;
+            height: 46px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.6);
+        }
+
         /* Floating language button */
         .lang-float {
             position: fixed;
@@ -859,6 +893,11 @@
         <p class="footer-copy">© 2025 Different Fusion. All rights reserved.</p>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- Floating Language Button -->
     <button class="lang-float" id="lang-btn" onclick="toggleLanguage()">EN</button>
 
@@ -1311,6 +1350,19 @@
         }
 
         window.addEventListener('DOMContentLoaded', initAnimations);
+
+    
+        /* --- Scroll to Top visibility --- */
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scroll-top');
+            if (btn) {
+                if (window.scrollY > 400) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            }
+        });
 
     </script>
 </body>
