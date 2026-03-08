@@ -787,9 +787,9 @@
         /* --- Videos --- */
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 900px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 960px;
         }
 
         .video-item {
@@ -827,7 +827,10 @@
             text-align: center;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .videos-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 500px) {
             .videos-grid { grid-template-columns: 1fr; }
         }
 
@@ -1168,8 +1171,10 @@
     <!-- Videos Section -->
     <section id="videos">
         <h2 class="section-title" data-i18n="videos-title">צפו בנו בפעולה</h2>
+        <div style="display:flex; justify-content:center;">
         <div class="videos-grid" id="videos-grid">
             <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען סרטונים...</span></div>
+        </div>
         </div>
         <div class="testimonials-more" id="videos-more" style="display:none;">
             <button class="btn-more-testimonials" onclick="openVideosModal()" data-i18n="btn-more-videos">לכל הסרטונים</button>
@@ -1716,7 +1721,7 @@
                     videosGrid.innerHTML =
                         '<div class="gallery-loading"><i class="fas fa-film"></i><span>סרטונים בקרוב</span></div>';
                 } else {
-                    const MAX_VIDEOS = 4;
+                    const MAX_VIDEOS = 3;
                     videosGrid.innerHTML = '';
                     data.videos.forEach(function(v, i) {
                         if (i < MAX_VIDEOS) {
