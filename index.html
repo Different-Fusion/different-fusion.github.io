@@ -1609,19 +1609,23 @@
         }
 
         /* --- Loading Screen --- */
-        window.addEventListener('load', function() {
+        function hideLoader() {
             const loader = document.getElementById('loading-screen');
             const body   = document.body;
-            // Min display time 1.2s so bar animation completes
-            setTimeout(function() {
+            if (loader && !loader.classList.contains('hidden')) {
                 loader.classList.add('hidden');
                 body.classList.remove('loading');
-                // Remove from DOM after fade
-                setTimeout(function() {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 1200);
+                setTimeout(function() { loader.style.display = 'none'; }, 500);
+            }
+        }
+
+        // Hide after page load
+        window.addEventListener('load', function() {
+            setTimeout(hideLoader, 1200);
         });
+
+        // Fallback: hide after 4 seconds no matter what
+        setTimeout(hideLoader, 4000);
 
     </script>
 </body>
