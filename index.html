@@ -669,7 +669,7 @@
         /* --- Testimonials --- */
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
 
@@ -679,6 +679,8 @@
             padding: 35px 30px;
             position: relative;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
 
         .testimonial-card::before {
@@ -712,6 +714,7 @@
             line-height: 1.8;
             margin-bottom: 25px;
             font-style: italic;
+            flex-grow: 1;
         }
 
         .testimonial-author {
@@ -748,9 +751,103 @@
             margin-top: 2px;
         }
 
+        .testimonials-more {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-more-testimonials {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 35px;
+            font-family: 'Bebas Neue';
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .btn-more-testimonials:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+
+        /* Testimonials Modal */
+        #testimonials-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-y: auto;
+            padding: 60px 5%;
+        }
+
+        #testimonials-modal.active { display: flex; }
+
+        .modal-inner {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .modal-title {
+            font-family: 'Bebas Neue';
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            color: var(--text-main);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-dim);
+            width: 44px;
+            height: 44px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 992px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 600px) {
             .testimonials-grid {
                 grid-template-columns: 1fr;
+            }
+            #testimonials-modal {
+                padding: 40px 4%;
             }
         }
     </style>
@@ -882,58 +979,22 @@
     <!-- Testimonials Section -->
     <section id="testimonials">
         <h2 class="section-title" data-i18n="testimonials-title">הם כבר חוו את זה</h2>
-        <div class="testimonials-grid" id="testimonials-grid">
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"הגעתם למסיבת היום הולדת שלי והפכתם אותה לחוויה שכולם עוד מדברים עליה. האנרגיה שלכם הדביקה את כל האורחים מהרגע הראשון. תודה ענקית!"</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">נ</div>
-                    <div>
-                        <div class="testimonial-name">נועה כהן</div>
-                        <div class="testimonial-role">מסיבת יום הולדת פרטית</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"עבדנו איתם על הפקת השיר הראשון שלנו — מקצועיות ברמה אחרת. הם הבינו בדיוק מה רצינו לבטא ונתנו לזה סאונד שלא ציפינו אליו. ממליצים בחום!"</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">א</div>
-                    <div>
-                        <div class="testimonial-name">אסף לוי</div>
-                        <div class="testimonial-role">הפקה מוזיקלית</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"Different Fusion ניגנו באירוע החברה שלנו ופשוט שברו את הבמה. שילוב הסטים שלהם היה מדויק לקהל שלנו — מ-20 עד 60. כולם יצאו עם חיוך."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">מ</div>
-                    <div>
-                        <div class="testimonial-name">מיכל רוזנברג</div>
-                        <div class="testimonial-role">אירוע קונספט חברתי</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"הגענו אליהם לאולפן לא בטוחים בכלל במה שאנחנו רוצים. הם ידעו לכוון, לייעץ ולהוציא מאיתנו את הטוב ביותר. התוצאה הייתה מעבר לכל ציפיה."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">ש</div>
-                    <div>
-                        <div class="testimonial-name">שירה ואלון מזרחי</div>
-                        <div class="testimonial-role">הקלטות אולפן</div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="testimonials-grid" id="testimonials-grid"></div>
+        <div class="testimonials-more" id="testimonials-more" style="display:none;">
+            <button class="btn-more-testimonials" onclick="openTestimonialsModal()" data-i18n="btn-more-testimonials">לכל ההמלצות</button>
         </div>
     </section>
+
+    <!-- Testimonials Modal -->
+    <div id="testimonials-modal">
+        <div class="modal-inner">
+            <div class="modal-header">
+                <span class="modal-title" data-i18n="testimonials-title">הם כבר חוו את זה</span>
+                <button class="modal-close" onclick="closeTestimonialsModal()">✕</button>
+            </div>
+            <div class="modal-grid" id="testimonials-modal-grid"></div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact">
@@ -1017,6 +1078,7 @@
                 "nav-contact": "בואו נשתף פעולה",
                 "nav-testimonials": "מה אומרים עלינו",
                 "testimonials-title": "הם כבר חוו את זה",
+                "btn-more-testimonials": "לכל ההמלצות",
                 "hero-cta": "הזמן עכשיו",
                 "about-title": "הסיפור שלנו",
                 "about-p1": "Different Fusion הוא פרויקט מוזיקלי ייחודי שנולד מהחיבור היצירתי בין דוראל פדלון וסיון חיים. המטרה שלנו היא להביא סאונד אחר, רענן ואנרגטי לעולם האירועים וההפקות המוזיקליות.",
@@ -1052,6 +1114,7 @@
                 "nav-contact": "Let's Collaborate",
                 "nav-testimonials": "What They Say",
                 "testimonials-title": "They've Already Felt It",
+                "btn-more-testimonials": "All Reviews",
                 "hero-cta": "Book Now",
                 "about-title": "Our Story",
                 "about-p1": "Different Fusion is a unique musical project born from the creative synergy between Dorel Fadlon and Sivan Haim. Our goal is to bring a fresh, energetic sound to the world of events and music production.",
@@ -1182,6 +1245,9 @@
                 if (e.key === 'ArrowLeft') prevImage();
                 if (e.key === 'Escape') closeLightbox();
             }
+            if (e.key === 'Escape' && document.getElementById('testimonials-modal').classList.contains('active')) {
+                closeTestimonialsModal();
+            }
             if (e.key === 'Escape' && document.getElementById('nav-links').classList.contains('active')) {
                 closeMenu();
             }
@@ -1202,6 +1268,16 @@
             const threshold = 50;
             if (touchEndX < touchStartX - threshold) nextImage();
             if (touchEndX > touchStartX + threshold) prevImage();
+        }
+
+        function openTestimonialsModal() {
+            document.getElementById('testimonials-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTestimonialsModal() {
+            document.getElementById('testimonials-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         function scrollToSection(id) {
@@ -1276,27 +1352,48 @@
             // Testimonials
             if (data.testimonials && data.testimonials.length > 0) {
                 const container = document.getElementById('testimonials-grid');
+                const moreBtn   = document.getElementById('testimonials-more');
+                const modalGrid = document.getElementById('testimonials-modal-grid');
+                const MAX_VISIBLE = 4;
+
                 if (container) {
                     container.innerHTML = '';
-                    data.testimonials.forEach(function(t) {
-                        const stars = '★'.repeat(Math.min(5, Math.max(1, t.stars || 5)));
-                        const avatar = t.name ? t.name.charAt(0) : '?';
-                        const card = document.createElement('div');
-                        card.className = 'testimonial-card';
-                        card.innerHTML =
-                            '<div class="testimonial-stars">' + stars + '</div>' +
-                            '<p class="testimonial-text">"' + t.text + '"</p>' +
-                            '<div class="testimonial-author">' +
-                                '<div class="testimonial-avatar">' + avatar + '</div>' +
-                                '<div>' +
-                                    '<div class="testimonial-name">' + t.name + '</div>' +
-                                    '<div class="testimonial-role">' + t.role + '</div>' +
-                                '</div>' +
-                            '</div>';
-                        container.appendChild(card);
+                    data.testimonials.forEach(function(t, i) {
+                        const card = buildTestimonialCard(t);
+                        if (i < MAX_VISIBLE) {
+                            container.appendChild(card);
+                        }
                     });
                 }
+
+                if (data.testimonials.length > MAX_VISIBLE) {
+                    if (moreBtn) moreBtn.style.display = 'block';
+                    if (modalGrid) {
+                        modalGrid.innerHTML = '';
+                        data.testimonials.forEach(function(t) {
+                            modalGrid.appendChild(buildTestimonialCard(t));
+                        });
+                    }
+                }
             }
+        }
+
+        function buildTestimonialCard(t) {
+            const stars  = '★'.repeat(Math.min(5, Math.max(1, t.stars || 5)));
+            const avatar = t.name ? t.name.charAt(0) : '?';
+            const card   = document.createElement('div');
+            card.className = 'testimonial-card';
+            card.innerHTML =
+                '<div class="testimonial-stars">' + stars + '</div>' +
+                '<p class="testimonial-text">"' + t.text + '"</p>' +
+                '<div class="testimonial-author">' +
+                    '<div class="testimonial-avatar">' + avatar + '</div>' +
+                    '<div>' +
+                        '<div class="testimonial-name">' + t.name + '</div>' +
+                        '<div class="testimonial-role">' + t.role + '</div>' +
+                    '</div>' +
+                '</div>';
+            return card;
         }
 
         async function loadDriveImages() {
