@@ -692,6 +692,144 @@
             .contact-box { padding: 30px 20px; }
         }
 
+        /* --- Events --- */
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .event-row {
+            display: grid;
+            grid-template-columns: 140px 1fr auto;
+            align-items: center;
+            gap: 30px;
+            padding: 25px 30px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: var(--transition);
+        }
+
+        .event-row:hover {
+            border-color: rgba(0, 242, 255, 0.3);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .event-date {
+            text-align: center;
+        }
+
+        .event-date-day {
+            font-family: 'Bebas Neue';
+            font-size: 2.8rem;
+            line-height: 1;
+            color: var(--primary);
+        }
+
+        .event-date-month {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .event-date-weekday {
+            font-size: 0.8rem;
+            color: rgba(160,160,160,0.5);
+            letter-spacing: 2px;
+            margin-top: 3px;
+        }
+
+        .event-info h3 {
+            font-family: 'Rajdhani';
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .event-info p {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        .event-info p i {
+            color: var(--primary);
+            margin-left: 6px;
+            font-size: 0.85rem;
+        }
+
+        .events-empty {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .events-empty i {
+            display: block;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 600px) {
+            .event-row {
+                grid-template-columns: 90px 1fr;
+                gap: 15px;
+                padding: 20px;
+            }
+            .event-date-day { font-size: 2rem; }
+        }
+
+        /* --- Videos --- */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .video-item {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 1px solid rgba(0,242,255,0.2);
+            box-shadow: 6px 6px 0px var(--primary);
+            transition: var(--transition);
+        }
+
+        .video-embed:hover {
+            box-shadow: 10px 10px 0px var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .video-title {
+            font-size: 1rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .videos-grid { grid-template-columns: 1fr; }
+        }
+
         /* --- Testimonials --- */
         .testimonials-grid {
             display: grid;
@@ -898,7 +1036,9 @@
     <div class="nav-links" id="nav-links">
         <a href="#" data-i18n="nav-about" onclick="scrollToSection('about'); return false;">הסיפור שלנו</a>
         <a href="#" data-i18n="nav-services" onclick="scrollToSection('services'); return false;">מה אנחנו עושים</a>
+        <a href="#" data-i18n="nav-events" onclick="scrollToSection('events'); return false;">מופעים קרובים</a>
         <a href="#" data-i18n="nav-music" onclick="scrollToSection('music'); return false;">מוזיקה וסטים</a>
+        <a href="#" data-i18n="nav-videos" onclick="scrollToSection('videos'); return false;">וידאו</a>
         <a href="#" data-i18n="nav-gallery" onclick="scrollToSection('gallery'); return false;">רגעים מהבמה</a>
         <a href="#" data-i18n="nav-testimonials" onclick="scrollToSection('testimonials'); return false;">מה אומרים עלינו</a>
         <a href="#" data-i18n="nav-contact" onclick="scrollToSection('contact'); return false;">בואו נשתף פעולה</a>
@@ -961,6 +1101,14 @@
         </div>
     </section>
 
+    <!-- Events Section -->
+    <section id="events">
+        <h2 class="section-title" data-i18n="events-title">מופעים קרובים</h2>
+        <div id="events-list">
+            <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען מופעים...</span></div>
+        </div>
+    </section>
+
     <!-- Music Section -->
     <section id="music">
         <h2 class="section-title" data-i18n="music-title">מוזיקה וסטים</h2>
@@ -976,22 +1124,19 @@
             </a>
         </div>
         <script>
-            // Show fallback if iframe fails to load in Safari
             setTimeout(function(){
-                var iframe = document.querySelector('.soundcloud-widget iframe');
-                if(iframe){
-                    try {
-                        var h = iframe.contentWindow.document.body;
-                        if(!h) throw '';
-                    } catch(e) {
-                        // iframe blocked - show fallback button
-                    }
-                }
-                // Always show fallback link below player
                 var fb = document.getElementById('sc-fallback');
                 if(fb) fb.style.display = 'block';
             }, 2000);
         </script>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos">
+        <h2 class="section-title" data-i18n="videos-title">צפו בנו בפעולה</h2>
+        <div class="videos-grid" id="videos-grid">
+            <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i><span>טוען סרטונים...</span></div>
+        </div>
     </section>
 
     <!-- Gallery -->
@@ -1108,7 +1253,11 @@
                 "nav-gallery": "רגעים מהבמה",
                 "nav-contact": "בואו נשתף פעולה",
                 "nav-testimonials": "מה אומרים עלינו",
+                "nav-events": "מופעים קרובים",
+                "nav-videos": "וידאו",
                 "testimonials-title": "הם כבר חוו את זה",
+                "events-title": "מופעים קרובים",
+                "videos-title": "צפו בנו בפעולה",
                 "btn-more-testimonials": "לכל ההמלצות",
                 "btn-more-gallery": "לכל הגלריה",
                 "hero-cta": "הזמן עכשיו",
@@ -1145,7 +1294,11 @@
                 "nav-gallery": "Stage Moments",
                 "nav-contact": "Let's Collaborate",
                 "nav-testimonials": "What They Say",
+                "nav-events": "Upcoming Shows",
+                "nav-videos": "Video",
                 "testimonials-title": "They've Already Felt It",
+                "events-title": "Upcoming Shows",
+                "videos-title": "Watch Us In Action",
                 "btn-more-testimonials": "All Reviews",
                 "btn-more-gallery": "Full Gallery",
                 "hero-cta": "Book Now",
@@ -1419,6 +1572,76 @@
                     }
                 }
             }
+
+            // Events
+            const eventsList = document.getElementById('events-list');
+            if (eventsList) {
+                if (!data.events || data.events.length === 0) {
+                    eventsList.innerHTML =
+                        '<div class="events-empty">' +
+                        '<i class="fas fa-calendar-alt"></i>' +
+                        '<span>אין מופעים קרובים כרגע — עקבו אחרינו ברשתות!</span>' +
+                        '</div>';
+                } else {
+                    const months = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+                    eventsList.innerHTML = '';
+                    const list = document.createElement('div');
+                    list.className = 'events-list';
+                    data.events.forEach(function(ev) {
+                        const parts = ev.date.split('/');
+                        const d     = parts[0];
+                        const m     = months[parseInt(parts[1], 10) - 1] || parts[1];
+                        const row   = document.createElement('div');
+                        row.className = 'event-row';
+                        row.innerHTML =
+                            '<div class="event-date">' +
+                                '<div class="event-date-day">' + d + '</div>' +
+                                '<div class="event-date-month">' + m + ' ' + parts[2] + '</div>' +
+                                '<div class="event-date-weekday">יום ' + ev.day + '</div>' +
+                            '</div>' +
+                            '<div class="event-info">' +
+                                '<h3>' + ev.title + '</h3>' +
+                                '<p><i class="fas fa-map-marker-alt"></i>' + ev.venue + ' · ' + ev.location + '</p>' +
+                            '</div>';
+                        list.appendChild(row);
+                    });
+                    eventsList.appendChild(list);
+                }
+            }
+
+            // Videos
+            const videosGrid = document.getElementById('videos-grid');
+            if (videosGrid) {
+                if (!data.videos || data.videos.length === 0) {
+                    videosGrid.innerHTML =
+                        '<div class="gallery-loading"><i class="fas fa-film"></i><span>סרטונים בקרוב</span></div>';
+                } else {
+                    videosGrid.innerHTML = '';
+                    data.videos.forEach(function(v) {
+                        const embedUrl = getEmbedUrl(v.url);
+                        if (!embedUrl) return;
+                        const item = document.createElement('div');
+                        item.className = 'video-item';
+                        item.innerHTML =
+                            '<div class="video-embed">' +
+                                '<iframe src="' + embedUrl + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+                            '</div>' +
+                            (v.title ? '<div class="video-title">' + v.title + '</div>' : '');
+                        videosGrid.appendChild(item);
+                    });
+                }
+            }
+        }
+
+        function getEmbedUrl(url) {
+            if (!url) return null;
+            // YouTube
+            var yt = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (yt) return 'https://www.youtube.com/embed/' + yt[1];
+            // Vimeo
+            var vm = url.match(/vimeo\.com\/(\d+)/);
+            if (vm) return 'https://player.vimeo.com/video/' + vm[1];
+            return null;
         }
 
         function buildTestimonialCard(t) {
