@@ -973,7 +973,6 @@
     <!-- Floating Language Button -->
     <button class="lang-float" id="lang-btn" onclick="toggleLanguage()">EN</button>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
         /* --- Dynamic Images from Google Drive --- */
         const DRIVE_API = "https://script.google.com/macros/s/AKfycbycOMreQiUSarfAkujIFuUF6DMZspUYdIvSLzwDA9a3xIeWn8kEd_TLUSrqc4sjTFA/exec";
 
@@ -1070,7 +1069,7 @@
 
         window.addEventListener('DOMContentLoaded', loadDriveImages);
 
-    </script><script>
+
         const translations = {
             he: {
                 "nav-about": "הסיפור שלנו",
@@ -1352,35 +1351,6 @@
                 grid.appendChild(item);
             });
         }
-
-        async function loadDriveImages() {
-            try {
-                const res  = await fetch(DRIVE_API, { mode: 'cors' });
-                const data = await res.json();
-                handleDriveData(data);
-                return;
-            } catch(e1) {}
-
-            try {
-                await new Promise(function(resolve, reject) {
-                    window._driveCallback = function(data) {
-                        handleDriveData(data);
-                        resolve();
-                    };
-                    const s   = document.createElement('script');
-                    s.src     = DRIVE_API + '?callback=_driveCallback&t=' + Date.now();
-                    s.onload  = resolve;
-                    s.onerror = reject;
-                    document.head.appendChild(s);
-                    setTimeout(reject, 8000);
-                });
-            } catch(e2) {
-                const grid = document.getElementById('gallery-grid');
-                if (grid) grid.innerHTML = '<div class="gallery-loading"><i class="fas fa-exclamation-circle"></i><span>שגיאה בטעינת תמונות</span></div>';
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', loadDriveImages);
 
     
         /* --- EmailJS --- */
